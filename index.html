@@ -2945,9 +2945,9 @@ Finally, Step 4: Restate your position..."
             storyText.dataset.original = storyText.innerHTML;
         }
 
-        // Wrap words in spans for highlighting
+        // Get all paragraphs to wrap
         const paragraphs = storyText.querySelectorAll('p');
-        const allWords = [];
+        const allWordSpans = [];
 
         paragraphs.forEach(p => {
             // Skip character names in speech bubbles
@@ -2955,73 +2955,73 @@ Finally, Step 4: Restate your position..."
                 return;
             }
 
-            // Save original HTML
-            const originalHTML = p.innerHTML;
+            // Function to wrap text nodes in spans
+            function wrapTextNodes(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const text = node.textContent;
+                    if (text.trim().length === 0) return;
 
-            // Split text into words while preserving HTML tags
-            const textContent = p.textContent;
-            const words = textContent.split(/\s+/).filter(w => w.trim().length > 0);
+                    // Split into words
+                    const words = text.split(/(\s+)/);
+                    const fragment = document.createDocumentFragment();
 
-            // Wrap each word in a span
-            let wordIndex = 0;
-            let newHTML = p.innerHTML;
+                    words.forEach(word => {
+                        if (word.trim().length > 0) {
+                            const span = document.createElement('span');
+                            span.className = 'word-highlight';
+                            span.textContent = word;
+                            allWordSpans.push(span);
+                            fragment.appendChild(span);
+                        } else if (word.length > 0) {
+                            // Preserve whitespace
+                            fragment.appendChild(document.createTextNode(word));
+                        }
+                    });
 
-            words.forEach((word, idx) => {
-                // Find the word in the HTML and wrap it
-                const cleanWord = word.replace(/[^\w\s'-]/g, '');
-                if (cleanWord.length > 0) {
-                    const spanWord = `<span class="word-highlight" data-word-index="${allWords.length}">${word}</span>`;
-                    allWords.push({ element: null, text: word, paragraph: p });
-
-                    // Replace first occurrence of the word
-                    const regex = new RegExp(`(?<![<>])\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b(?![<>])`, 'i');
-                    newHTML = newHTML.replace(regex, spanWord);
+                    node.replaceWith(fragment);
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    // Skip certain elements
+                    if (node.classList && (node.classList.contains('vocab-word') || node.tagName === 'BUTTON')) {
+                        return;
+                    }
+                    // Recursively process child nodes
+                    Array.from(node.childNodes).forEach(child => wrapTextNodes(child));
                 }
-            });
-
-            p.innerHTML = newHTML;
-        });
-
-        // Get all word span elements
-        const wordSpans = storyText.querySelectorAll('.word-highlight');
-        wordSpans.forEach((span, idx) => {
-            if (allWords[idx]) {
-                allWords[idx].element = span;
             }
+
+            // Clone the paragraph to avoid modifying during iteration
+            const clone = p.cloneNode(true);
+            wrapTextNodes(clone);
+            p.innerHTML = clone.innerHTML;
         });
+
+        // Get all word spans after wrapping
+        const wordSpans = storyText.querySelectorAll('.word-highlight');
 
         // Create clean text for speech
-        const cleanText = storyText.textContent.trim();
+        const cleanText = Array.from(wordSpans).map(span => span.textContent).join(' ');
 
         // Create utterance
         const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.rate = 0.85;
+        utterance.rate = 0.9;
 
         let currentWordIdx = 0;
-        let charPosition = 0;
+        let boundaryFired = false;
 
+        // Try to use word boundaries
         utterance.onboundary = (event) => {
             if (event.name === 'word') {
+                boundaryFired = true;
+
                 // Remove previous highlights
                 wordSpans.forEach(span => {
                     span.classList.remove('active-word');
-                    span.style.backgroundColor = '';
-                    span.style.color = '';
-                    span.style.fontWeight = '';
-                    span.style.boxShadow = '';
                 });
 
                 // Highlight current word
-                if (currentWordIdx < allWords.length && allWords[currentWordIdx].element) {
-                    const currentWord = allWords[currentWordIdx].element;
+                if (currentWordIdx < wordSpans.length) {
+                    const currentWord = wordSpans[currentWordIdx];
                     currentWord.classList.add('active-word');
-                    currentWord.style.backgroundColor = '#FDE68A';
-                    currentWord.style.color = '#000';
-                    currentWord.style.fontWeight = '600';
-                    currentWord.style.boxShadow = '0 0 0 2px #F59E0B';
-                    currentWord.style.borderRadius = '2px';
-                    currentWord.style.padding = '2px 1px';
-                    currentWord.style.display = 'inline-block';
 
                     // Scroll into view
                     currentWord.scrollIntoView({
@@ -3035,7 +3035,46 @@ Finally, Step 4: Restate your position..."
             }
         };
 
+        // Fallback: If word boundaries don't work, use timing-based highlighting
+        let fallbackTimer;
+        const avgWordDuration = 60000 / (0.9 * 150); // ~444ms per word at 0.9 rate, 150 WPM
+
+        utterance.onstart = () => {
+            if (!boundaryFired) {
+                // Start fallback after short delay
+                setTimeout(() => {
+                    if (!boundaryFired) {
+                        console.log('Using fallback word highlighting');
+                        highlightWordByTiming();
+                    }
+                }, 500);
+            }
+        };
+
+        function highlightWordByTiming() {
+            if (currentWordIdx >= wordSpans.length || !speechSynthesis.speaking) {
+                return;
+            }
+
+            // Remove previous highlights
+            wordSpans.forEach(span => span.classList.remove('active-word'));
+
+            // Highlight current word
+            if (wordSpans[currentWordIdx]) {
+                wordSpans[currentWordIdx].classList.add('active-word');
+                wordSpans[currentWordIdx].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest'
+                });
+            }
+
+            currentWordIdx++;
+            fallbackTimer = setTimeout(highlightWordByTiming, avgWordDuration);
+        }
+
         utterance.onend = () => {
+            clearTimeout(fallbackTimer);
             btn.classList.remove('btn-playing');
             btn.innerHTML = '<span>🎙️</span><span>Read Aloud</span>';
             removeAllHighlights();
@@ -3046,6 +3085,7 @@ Finally, Step 4: Restate your position..."
         };
 
         utterance.onerror = () => {
+            clearTimeout(fallbackTimer);
             btn.classList.remove('btn-playing');
             btn.innerHTML = '<span>🎙️</span><span>Read Aloud</span>';
             removeAllHighlights();
