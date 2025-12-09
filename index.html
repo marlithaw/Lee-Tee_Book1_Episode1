@@ -3081,18 +3081,18 @@ Finally, Step 4: Restate your position..."
             const word = wordSpans[currentWordIdx].textContent;
             const wordLength = word.length;
 
-            // Base duration calculation - FASTER timing
-            // Using 180 WPM instead of 150 to speed up highlights
-            const baseWordDuration = 60000 / (utterance.rate * 180); // ~370ms (was 444ms)
+            // Base duration calculation - OPTIMIZED timing
+            // Using 165 WPM for balanced speed (between 150-too slow and 180-too fast)
+            const baseWordDuration = 60000 / (utterance.rate * 165); // ~404ms
 
             // Adjust based on word length (longer words take more time)
             // Average English word is ~5 characters
             const lengthFactor = wordLength / 5;
             const adjustedDuration = baseWordDuration * (0.6 + (lengthFactor * 0.4));
 
-            // Reduced pause for punctuation
+            // Moderate pause for punctuation
             const hasPunctuation = /[.,!?;:]/.test(word);
-            const punctuationPause = hasPunctuation ? 80 : 0;
+            const punctuationPause = hasPunctuation ? 100 : 0;
 
             const totalDuration = adjustedDuration + punctuationPause;
 
