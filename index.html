@@ -3023,12 +3023,20 @@ Finally, Step 4: Restate your position..."
                 const currentWord = wordSpans[index];
                 currentWord.classList.add('active-word');
 
-                // Scroll into view
-                currentWord.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest'
-                });
+                // Gentle scroll - only if word is outside viewport
+                const rect = currentWord.getBoundingClientRect();
+                const isVisible = (
+                    rect.top >= 100 &&
+                    rect.bottom <= (window.innerHeight - 100)
+                );
+
+                if (!isVisible) {
+                    currentWord.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',  // Changed from 'center' to 'nearest'
+                        inline: 'nearest'
+                    });
+                }
             }
         }
 
@@ -3073,19 +3081,18 @@ Finally, Step 4: Restate your position..."
             const word = wordSpans[currentWordIdx].textContent;
             const wordLength = word.length;
 
-            // Base duration calculation
-            // Average: 150 WPM = 400ms per word at rate 1.0
-            // Adjusted for current rate (0.9)
-            const baseWordDuration = 60000 / (utterance.rate * 150); // ~444ms
+            // Base duration calculation - FASTER timing
+            // Using 180 WPM instead of 150 to speed up highlights
+            const baseWordDuration = 60000 / (utterance.rate * 180); // ~370ms (was 444ms)
 
             // Adjust based on word length (longer words take more time)
             // Average English word is ~5 characters
             const lengthFactor = wordLength / 5;
-            const adjustedDuration = baseWordDuration * (0.7 + (lengthFactor * 0.3));
+            const adjustedDuration = baseWordDuration * (0.6 + (lengthFactor * 0.4));
 
-            // Add slight pause for punctuation
+            // Reduced pause for punctuation
             const hasPunctuation = /[.,!?;:]/.test(word);
-            const punctuationPause = hasPunctuation ? 150 : 0;
+            const punctuationPause = hasPunctuation ? 80 : 0;
 
             const totalDuration = adjustedDuration + punctuationPause;
 
