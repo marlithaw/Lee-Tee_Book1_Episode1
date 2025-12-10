@@ -1784,41 +1784,7 @@ p.active-sentence {
       But Tee walked like the sound belonged to him, so she stayed close.
     </p>
   </div>
-  
-  <!-- FIRST ACTIVE LEARNING: Identify the Problem -->
-  <div class="mt-8 p-6 bg-yellow-50 rounded-xl">
-    <h3 class="font-display text-2xl font-bold mb-4">🤔 Think About It (DOK 2)</h3>
-    
-    <p class="text-lg mb-6">Listen to Jayden's argument. What's the problem with it? Choose all that apply:</p>
-    
-    <div class="space-y-3">
-      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
-        <input type="checkbox" class="mt-1 problem-check" data-correct="false">
-        <span>He's speaking too loudly</span>
-      </label>
-      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
-        <input type="checkbox" class="problem-check" data-correct="true">
-        <span>He makes claims without evidence</span>
-      </label>
-      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
-        <input type="checkbox" class="problem-check" data-correct="true">
-        <span>He uses generalizations like "never" and "always"</span>
-      </label>
-      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
-        <input type="checkbox" class="problem-check" data-correct="false">
-        <span>He's talking during recess</span>
-      </label>
-    </div>
-    
-    <button onclick="checkProblemAnswers()" class="mt-4 bg-teal-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-teal-700 transition w-full">
-      Check My Thinking
-    </button>
-    
-    <div id="problemFeedback" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
-      <p class="font-bold text-green-800 mb-2">✓ Great analysis!</p>
-      <p>Jayden's argument is weak because he makes big claims ("never wins at nothing") without any proof. That's called an <strong>unsupported claim</strong>. Let's see how Tee responds...</p>
-    </div>
-  </div>
+
 </section>
 
     <!-- STORY SECTION 3: Jayden's Challenge -->
@@ -1906,6 +1872,41 @@ p.active-sentence {
       <button class="quiz-option w-full text-left" onclick="checkAnswer(this, false, 'comp2')">D) Confidence</button>
     </div>
     <p class="mt-3 text-green-600 font-semibold hidden" id="comp2-feedback">✓ Exactly! Tee noticed Jayden made claims but gave "zero facts" - no proof at all.</p>
+  </div>
+
+  <!-- ACTIVE LEARNING: Identify the Problem -->
+  <div class="mt-8 p-6 bg-yellow-50 rounded-xl">
+    <h3 class="font-display text-2xl font-bold mb-4">🤔 Think About It (DOK 2)</h3>
+
+    <p class="text-lg mb-6">Listen to Jayden's argument. What's the problem with it? Choose all that apply:</p>
+
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
+        <input type="checkbox" class="mt-1 problem-check" data-correct="false">
+        <span>He's speaking too loudly</span>
+      </label>
+      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
+        <input type="checkbox" class="problem-check" data-correct="true">
+        <span>He makes claims without evidence</span>
+      </label>
+      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
+        <input type="checkbox" class="problem-check" data-correct="true">
+        <span>He uses generalizations like "never" and "always"</span>
+      </label>
+      <label class="flex items-start gap-3 p-4 bg-white rounded-lg cursor-pointer hover:bg-yellow-100 transition">
+        <input type="checkbox" class="problem-check" data-correct="false">
+        <span>He's talking during recess</span>
+      </label>
+    </div>
+
+    <button onclick="checkProblemAnswers()" class="mt-4 bg-teal-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-teal-700 transition w-full">
+      Check My Thinking
+    </button>
+
+    <div id="problemFeedback" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
+      <p class="font-bold text-green-800 mb-2">✓ Great analysis!</p>
+      <p>Jayden's argument is weak because he makes big claims ("never wins at nothing") without any proof. That's called an <strong>unsupported claim</strong>. Let's see how Tee responds...</p>
+    </div>
   </div>
 </section>
 
