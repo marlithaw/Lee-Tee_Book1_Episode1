@@ -2840,7 +2840,7 @@ Finally, Step 4: Restate your position..."
       element.classList.add('selected');
       learningState.emotion = emotion;
       saveProgress();
-      
+
       // Mark progress
       const progressElement = document.getElementById('progress-sel');
       if (progressElement && !progressElement.classList.contains('completed')) {
@@ -2850,6 +2850,56 @@ Finally, Step 4: Restate your position..."
         saveProgress();
         updateProgressPercentage();
       }
+
+      // NEW: Adapt experience based on emotion
+      if (emotion === 'tired') {
+        // Auto-enable audio features
+        const audioToggle = document.getElementById('toggleAudio');
+        if (audioToggle && !audioToggle.classList.contains('on')) {
+          audioToggle.classList.add('on');
+        }
+
+        // Show encouraging message
+        showAdaptiveMessage('💙 Got it! I'll make sure the audio features are ready to help you follow along.');
+
+      } else if (emotion === 'nervous') {
+        // Auto-show hints
+        const hintsToggle = document.getElementById('toggleHints');
+        if (hintsToggle && !hintsToggle.classList.contains('on')) {
+          hintsToggle.classList.add('on');
+          document.querySelectorAll('.hint-text').forEach(el => {
+            el.style.display = 'block';
+          });
+        }
+
+        // Auto-show SIOP supports
+        const siopToggle = document.getElementById('toggleSiop');
+        if (siopToggle && !siopToggle.classList.contains('on')) {
+          toggleSiopStrategies();
+        }
+
+        showAdaptiveMessage('💜 No worries! I turned on extra help features. You\'ve got this!');
+
+      } else if (emotion === 'excited') {
+        showAdaptiveMessage('🎉 Love the energy! Let\'s dive in!');
+
+      } else if (emotion === 'calm') {
+        showAdaptiveMessage('🌟 Perfect mindset for learning. Let\'s get started!');
+      }
+    }
+
+    // NEW FUNCTION: Show adaptive message
+    function showAdaptiveMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white px-6 py-3 rounded-full shadow-lg z-50 animate-bounce';
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+
+      setTimeout(() => {
+        messageDiv.classList.remove('animate-bounce');
+        messageDiv.classList.add('opacity-0', 'transition-opacity');
+        setTimeout(() => messageDiv.remove(), 500);
+      }, 3000);
     }
 
     function selectFinalEmotion(element, emotion) {
