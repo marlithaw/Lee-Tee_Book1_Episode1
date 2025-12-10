@@ -1591,69 +1591,6 @@ p.active-sentence {
   </div>
 </div>
 <!-- END OF VOCABULARY GALLERY -->
-
-<!-- FILL-IN-THE-BLANK ACTIVITY -->
-      <div class="space-y-6">
-        <!-- BLANK 1: CLAIM -->
-        <div class="bg-white p-6 rounded-lg shadow">
-          <p class="text-lg mb-4">
-            1. "Tee never wins at anything!" is Jayden's 
-            <span class="vocab-predict">
-              <span class="vocab-blank" id="blank1" onclick="showVocabChoices('blank1', 'claim')">___</span>
-              <div id="choices1" class="vocab-choices">
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'evidence', false)">evidence</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'claim', true)">claim</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'counterclaim', false)">counterclaim</button>
-              </div>
-            </span>
-            — his main point.
-          </p>
-          <div id="feedback1" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
-            <p class="font-bold text-green-800">✓ Correct! A <strong>claim</strong> is your main point or what you're trying to prove.</p>
-            <p class="text-sm mt-2 text-green-700">En español: afirmación</p>
-          </div>
-        </div>
-
-        <!-- BLANK 2: EVIDENCE -->
-        <div class="bg-white p-6 rounded-lg shadow">
-          <p class="text-lg mb-4">
-            2. Tee brought 
-            <span class="vocab-predict">
-              <span class="vocab-blank" id="blank2" onclick="showVocabChoices('blank2', 'evidence')">___</span>
-              <div id="choices2" class="vocab-choices">
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'evidence', true)">evidence</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'claim', false)">claim</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'counterclaim', false)">counterclaim</button>
-              </div>
-            </span>
-            when she said "Ms. R checked attendance... I been on-time all quarter."
-          </p>
-          <div id="feedback2" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
-            <p class="font-bold text-green-800">✓ Correct! <strong>Evidence</strong> is proof or facts that support your claim. We also call these "receipts"!</p>
-            <p class="text-sm mt-2 text-green-700">En español: evidencia, prueba</p>
-          </div>
-        </div>
-
-        <!-- BLANK 3: COUNTERCLAIM -->
-        <div class="bg-white p-6 rounded-lg shadow">
-          <p class="text-lg mb-4">
-            3. A 
-            <span class="vocab-predict">
-              <span class="vocab-blank" id="blank3" onclick="showVocabChoices('blank3', 'counterclaim')">___</span>
-              <div id="choices3" class="vocab-choices">
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'evidence', false)">evidence</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'claim', false)">claim</button>
-                <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'counterclaim', true)">counterclaim</button>
-              </div>
-            </span>
-            is the other side's argument that you need to address.
-          </p>
-          <div id="feedback3" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
-            <p class="font-bold text-green-800">✓ Correct! A <strong>counterclaim</strong> is the opposing view. Addressing it means explaining why that view is weak.</p>
-            <p class="text-sm mt-2 text-green-700">En español: contraargumento</p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- STORY SECTION 1: The Setup -->
@@ -1726,6 +1663,75 @@ p.active-sentence {
       <button class="quiz-option w-full text-left" onclick="checkAnswer(this, false, 'comp1')">D) Writing a conclusion</button>
     </div>
     <p class="mt-3 text-green-600 font-semibold hidden" id="comp1-feedback">✓ Right! Lee says the counterclaim part feels "slippery" and "hard to hold."</p>
+  </div>
+</section>
+
+<!-- VOCABULARY APPLICATION - NOW THAT YOU'VE SEEN THE WORDS -->
+<section class="p-8 md:p-12 bg-amber-50">
+  <h3 class="font-display text-2xl font-bold mb-4 text-purple-700">Now You Try: Use the Words</h3>
+  <p class="text-lg mb-6">You just read those three words in the story. Now can you identify which word fits in each sentence?</p>
+
+  <!-- FILL-IN-THE-BLANK ACTIVITY (moved from vocabulary section) -->
+  <div class="space-y-6">
+    <!-- BLANK 1: CLAIM -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <p class="text-lg mb-4">
+        1. "Tee never wins at anything!" is Jayden's
+        <span class="vocab-predict">
+          <span class="vocab-blank" id="blank1" onclick="showVocabChoices('blank1', 'claim')">___</span>
+          <div id="choices1" class="vocab-choices">
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'evidence', false)">evidence</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'claim', true)">claim</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank1', 'choices1', 'counterclaim', false)">counterclaim</button>
+          </div>
+        </span>
+        — his main point.
+      </p>
+      <div id="feedback1" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
+        <p class="font-bold text-green-800">✓ Correct! A <strong>claim</strong> is your main point or what you're trying to prove.</p>
+        <p class="text-sm mt-2 text-green-700">En español: afirmación</p>
+      </div>
+    </div>
+
+    <!-- BLANK 2: EVIDENCE -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <p class="text-lg mb-4">
+        2. Tee brought
+        <span class="vocab-predict">
+          <span class="vocab-blank" id="blank2" onclick="showVocabChoices('blank2', 'evidence')">___</span>
+          <div id="choices2" class="vocab-choices">
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'evidence', true)">evidence</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'claim', false)">claim</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank2', 'choices2', 'counterclaim', false)">counterclaim</button>
+          </div>
+        </span>
+        when she said "Ms. R checked attendance... I been on-time all quarter."
+      </p>
+      <div id="feedback2" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
+        <p class="font-bold text-green-800">✓ Correct! <strong>Evidence</strong> is proof or facts that support your claim. We also call these "receipts"!</p>
+        <p class="text-sm mt-2 text-green-700">En español: evidencia, prueba</p>
+      </div>
+    </div>
+
+    <!-- BLANK 3: COUNTERCLAIM -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <p class="text-lg mb-4">
+        3. A
+        <span class="vocab-predict">
+          <span class="vocab-blank" id="blank3" onclick="showVocabChoices('blank3', 'counterclaim')">___</span>
+          <div id="choices3" class="vocab-choices">
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'evidence', false)">evidence</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'claim', false)">claim</button>
+            <button class="vocab-choice-btn" onclick="checkVocabChoice('blank3', 'choices3', 'counterclaim', true)">counterclaim</button>
+          </div>
+        </span>
+        is the other side's argument that you need to address.
+      </p>
+      <div id="feedback3" class="hidden mt-4 p-4 bg-green-100 rounded-lg">
+        <p class="font-bold text-green-800">✓ Correct! A <strong>counterclaim</strong> is the opposing view. Addressing it means explaining why that view is weak.</p>
+        <p class="text-sm mt-2 text-green-700">En español: contraargumento</p>
+      </div>
+    </div>
   </div>
 </section>
 
