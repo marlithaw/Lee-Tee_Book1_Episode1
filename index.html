@@ -3402,16 +3402,26 @@ Finally, Step 4: Restate your position..."
     function checkProblemAnswers() {
       const checkboxes = document.querySelectorAll('.problem-check');
       let allCorrect = true;
-      
+      let correctCount = 0;
+      let incorrectCount = 0;
+
       checkboxes.forEach(checkbox => {
         const isCorrect = checkbox.dataset.correct === 'true';
         const isChecked = checkbox.checked;
-        
+
+        if (isCorrect && isChecked) {
+          correctCount++;
+        }
+
+        if (!isCorrect && isChecked) {
+          incorrectCount++;
+        }
+
         if ((isCorrect && !isChecked) || (!isCorrect && isChecked)) {
           allCorrect = false;
         }
       });
-      
+
       if (allCorrect) {
         document.getElementById('problemFeedback').classList.remove('hidden');
         if (!learningState.completedActivities.includes('problemAnalysis')) {
@@ -3420,9 +3430,20 @@ Finally, Step 4: Restate your position..."
           awardBadge('🧠');
         }
       } else {
-        alert('Not quite! Remember: we\'re looking for what makes the ARGUMENT weak, not just behavior issues.');
+        // Better feedback based on what they got wrong
+        let message = 'Not quite! ';
+
+        if (incorrectCount > 0) {
+          message += 'Remember: we\'re looking for what makes the ARGUMENT weak, not just behavior issues. ';
+        }
+
+        if (correctCount < 2) {
+          message += 'There are TWO correct answers - make sure you select both!';
+        }
+
+        alert(message);
       }
-      
+
       saveProgress();
     }
 
