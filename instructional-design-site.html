@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lee & Tee Instructional Design Hub</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --accent: #7c3aed;
+      --accent2: #0ea5e9;
+      --ok: #166534;
+      --gap: #9a3412;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f5f3ff 0%, var(--bg) 18%);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+    .hero {
+      background: radial-gradient(circle at top right, #dbeafe 0, #f5f3ff 45%, #fff 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 28px rgba(15,23,42,.06);
+    }
+    h1 { margin: 0 0 .35rem; font-size: clamp(1.4rem, 3vw, 2rem); }
+    .muted { color: var(--muted); }
+    .stats {
+      display: grid;
+      gap: .75rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+    .pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .8rem;
+    }
+    .pill strong { display: block; font-size: 1.2rem; }
+
+    .section { margin-top: 1rem; }
+    .grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: .9rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: .2rem .5rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .tag.ok { background: #dcfce7; color: var(--ok); }
+    .tag.gap { background: #ffedd5; color: var(--gap); }
+
+    .roadmap { display: grid; gap: .6rem; }
+    .phase {
+      border-left: 4px solid var(--accent);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left-width: 4px;
+      border-radius: 10px;
+      padding: .75rem .85rem;
+    }
+    .phase h4 { margin: 0 0 .35rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td { border-bottom: 1px solid var(--border); padding: .55rem; text-align: left; }
+    th { background: #f8fafc; }
+
+    .footer { margin: 1rem 0 2rem; font-size: .9rem; color: var(--muted); }
+    code { background: #f1f5f9; padding: .08rem .28rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Instructional Design Hub</h1>
+      <p class="muted">A single-page website that turns the repo audit into a practical build plan for Episode teams.</p>
+      <div class="stats">
+        <div class="pill"><span class="tag ok">Strengths</span><strong>5</strong><span class="muted">Strong foundations in place</span></div>
+        <div class="pill"><span class="tag gap">Gaps</span><strong>7</strong><span class="muted">High-priority instructional gaps</span></div>
+        <div class="pill"><span class="tag">Phases</span><strong>4</strong><span class="muted">Roadmap to operationalize quality</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What’s already working</h2>
+      <div class="grid">
+        <article class="card"><span class="tag ok">Architecture</span><h3>Engine structure exists</h3><p class="muted">Schema, section types, activity types, and layered content model already provide a reusable lesson container.</p></article>
+        <article class="card"><span class="tag ok">Objectives</span><h3>Objective metadata present</h3><p class="muted">Language/content objectives and standards alignment are represented in config and render paths.</p></article>
+        <article class="card"><span class="tag ok">Lesson flow</span><h3>Episode 1 is a full learning arc</h3><p class="muted">SEL → vocab → story checks → strategy → writing → reflection gives a replicable progression.</p></article>
+        <article class="card"><span class="tag ok">Learner supports</span><h3>Engagement & access</h3><p class="muted">Points, badges, multimodal interactions, accessibility toggles, and i18n are all active foundations.</p></article>
+        <article class="card"><span class="tag ok">QA process</span><h3>Parity discipline</h3><p class="muted">Parity docs/checklists already reduce regression risk during migration work.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What’s missing (and why it matters)</h2>
+      <table>
+        <thead>
+          <tr><th>Gap</th><th>Impact</th><th>Priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>No cross-episode instructional spec</td><td>Episode quality can drift between authors.</td><td>High</td></tr>
+          <tr><td>Episode 2 still a stub</td><td>No proof of Math transfer in architecture.</td><td>High</td></tr>
+          <tr><td>No objective-to-assessment map</td><td>Mastery claims are hard to validate.</td><td>High</td></tr>
+          <tr><td>Layer model is inconsistent in authored content</td><td>Supports/checks become ad hoc.</td><td>Medium</td></tr>
+          <tr><td>No differentiation matrix</td><td>Supports are thematic, not systematically targeted.</td><td>Medium</td></tr>
+          <tr><td>Rubrics not standardized</td><td>Feedback quality varies episode-to-episode.</td><td>Medium</td></tr>
+          <tr><td>Limited instructional analytics taxonomy</td><td>Hard to improve based on learner evidence.</td><td>Medium</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Build roadmap</h2>
+      <div class="roadmap">
+        <article class="phase"><h4>Phase 1 — Define the contract</h4><p class="muted">Create <code>docs/INSTRUCTIONAL-DESIGN-SPEC.md</code> with required arc, mandatory checks/supports, mastery evidence, accessibility minimums.</p></article>
+        <article class="phase"><h4>Phase 2 — Enforce quality</h4><p class="muted">Extend validator rules so missing instructional artifacts (checks/support layers for assessed sections) are flagged early.</p></article>
+        <article class="phase"><h4>Phase 3 — Prove with Episode 2</h4><p class="muted">Implement full Episode 2 lesson flow with explicit objective-assessment traceability + remediation path.</p></article>
+        <article class="phase"><h4>Phase 4 — Iterate with data</h4><p class="muted">Adopt an event taxonomy (misconceptions/retries/hint usage/language toggles) and run recurring instructional review.</p></article>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>Immediate next actions</h2>
+      <ol>
+        <li>Draft <code>docs/INSTRUCTIONAL-DESIGN-SPEC.md</code>.</li>
+        <li>Add objective-to-activity mapping in Episode docs/configs.</li>
+        <li>Implement at least 4 real instructional sections in Episode 2.</li>
+        <li>Add validator checks for required support/check layers.</li>
+      </ol>
+    </section>
+
+    <p class="footer">Tip: Open this file directly or via local server, e.g. <code>python3 -m http.server 4173</code> then visit <code>http://localhost:4173/instructional-design-site.html</code>.</p>
+  </main>
+</body>
+</html>

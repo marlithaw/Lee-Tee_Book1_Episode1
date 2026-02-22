@@ -195,3 +195,18 @@ When testing `episode.html?ep=1` against the original `episode1.html`:
 ├── episode1.html           # Original Episode 1 (reference)
 └── archive/                # Quarantined unused files
 ```
+
+
+## Instructional Design Hub
+
+A standalone website view of the instructional design inventory and action plan is available at:
+
+- `instructional-design-site.html`
+
+Run locally:
+
+```bash
+python3 -m http.server 4173
+# then open http://localhost:4173/instructional-design-site.html
+```
+
