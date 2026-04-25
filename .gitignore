@@ -1,0 +1,23 @@
+# Backup files (except archived ones)
+*_backup_*.html
+episode1_backup_*.html
+!archive/**/*_backup_*.html
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+.cache/
